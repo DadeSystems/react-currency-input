@@ -32,6 +32,3 @@ ReactDOM.render(
   <CurrencyInput onChangeEvent={onChangeEvent} decimalSeparator="." thousandSeparator="," />,
   document.getElementById('example7')
 );
-
-ReactDOM.render(<CurrencyInput prefix="$" autoFocus={true}/>, document.getElementById('example8'));
-
