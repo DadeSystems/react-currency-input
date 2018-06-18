@@ -51,7 +51,6 @@ class CurrencyInput extends Component {
         delete customProps.prefix;
         delete customProps.suffix;
         delete customProps.selectAllOnFocus;
-        delete customProps.autoFocus;
 
         let initialValue = props.value;
         if (initialValue === null) {
@@ -120,16 +119,9 @@ class CurrencyInput extends Component {
      */
     componentDidMount(){
         let node = ReactDOM.findDOMNode(this.theInput);
-        let selectionStart, selectionEnd;
 
-        if (this.props.autoFocus) {
-            this.theInput.focus();
-            selectionEnd = this.state.maskedValue.length - this.props.suffix.length;
-            selectionStart = selectionEnd;
-        } else {
-            selectionEnd = Math.min(node.selectionEnd, this.theInput.value.length - this.props.suffix.length);
-            selectionStart = Math.min(node.selectionStart, selectionEnd);
-        }
+        let selectionEnd = Math.min(node.selectionEnd, this.theInput.value.length - this.props.suffix.length);
+        let selectionStart = Math.min(node.selectionStart, selectionEnd);
 
         this.setSelectionRange(node, selectionStart, selectionEnd);
     }
@@ -294,7 +286,6 @@ CurrencyInput.propTypes = {
 CurrencyInput.defaultProps = {
     onChange: function(maskValue, value, event) {/*no-op*/},
     onChangeEvent: function(event, maskValue, value) {/*no-op*/},
-    autoFocus: false,
     value: '0',
     decimalSeparator: '.',
     thousandSeparator: ',',
